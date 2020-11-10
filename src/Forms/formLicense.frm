@@ -46,7 +46,3 @@ Attribute VB_Exposed = False
 Private Sub cmdOK_Click()
     Me.Hide
 End Sub
-
-Private Sub Label1_Click()
-
-End Sub
