@@ -1,6 +1,6 @@
 Attribute VB_Name = "Common"
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-' Copyright © 2020, Rishat D. Kagirov (iEPCBM)
+' Copyright Â© 2020, Rishat D. Kagirov (iEPCBM)
 ' All rights reserved.
 '
 ' Redistribution and use in source and binary forms, with or without modification,
@@ -60,11 +60,11 @@ Public Enum SETTING
 End Enum
 
 Public Function getSetting(ByVal stg As SETTING) As String
-    getSetting = listSettings.Range("B" & Val(stg)).value
+    getSetting = SheetSettings.Range("B" & Val(stg)).value
 End Function
 
 Public Sub setSetting(ByVal stg As SETTING, ByVal strVal As String)
-    listSettings.Range("B" & Val(stg)).value = strVal
+    SheetSettings.Range("B" & Val(stg)).value = strVal
 End Sub
 
 Public Sub displayMatrix(matrix() As Integer)
