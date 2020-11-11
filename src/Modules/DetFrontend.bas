@@ -1,6 +1,6 @@
 Attribute VB_Name = "DetFrontend"
 '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-' Copyright © 2020, Rishat D. Kagirov (iEPCBM)
+' Copyright Â© 2020, Rishat D. Kagirov (iEPCBM)
 ' All rights reserved.
 '
 ' Redistribution and use in source and binary forms, with or without modification,
@@ -31,8 +31,8 @@ Attribute VB_Name = "DetFrontend"
 
 Public Sub selectLine(ByVal isRow As Boolean, ByVal n As Integer)
     resetSelectionWithout isRow, n
-    ListDet.selectedLine = n
-    ListDet.isRowSelected = isRow
+    SheetDet.selectedLine = n
+    SheetDet.isRowSelected = isRow
     Dim alphabet As Variant
     alphabet = Array("A", "B", "C", "D", "E", "F", "G", "H", "I")
     If Not isRow Then
@@ -43,8 +43,8 @@ Public Sub selectLine(ByVal isRow As Boolean, ByVal n As Integer)
 End Sub
 
 Public Sub cmdsPaste_Click(ByVal isRow As Boolean, ByVal n As Integer)
-    If getSetting(stgHasMatrixOptimized) = 0 And (ListDet.isRowSelected Eqv isRow) And Not (ListDet.selectedLine = n Or ListDet.selectedLine = -1) Then
-        detSumToLine isRow, ListDet.selectedLine, n, Range(getSetting(stgAddrFactor)).value
+    If getSetting(stgHasMatrixOptimized) = 0 And (SheetDet.isRowSelected Eqv isRow) And Not (SheetDet.selectedLine = n Or SheetDet.selectedLine = -1) Then
+        detSumToLine isRow, SheetDet.selectedLine, n, Range(getSetting(stgAddrFactor)).value
         checkOptimization
     End If
 End Sub
@@ -58,7 +58,7 @@ Public Sub tbtsSelection_Click(ByVal isRow As Boolean, ByVal n As Integer, ByVal
 End Sub
 
 Public Sub resetMatrixStyle()
-    With ListDet
+    With SheetDet
         .selectedLine = -1
         .Range(getSetting(stgRangeMatrix)).Interior.Color = xlNone
     End With
@@ -67,70 +67,70 @@ End Sub
 Public Sub resetSelectionWithout(ByVal isRow As Boolean, ByVal n As Integer)
     resetMatrixStyle
     If isRow Then
-        With ListDet
+        With SheetDet
             .tbtSelCol1.value = False
             .tbtSelCol2.value = False
             .tbtSelCol3.value = False
             .tbtSelCol4.value = False
         End With
         If n = 1 Then
-            With ListDet
+            With SheetDet
                 .tbtSelRow2.value = False
                 .tbtSelRow3.value = False
                 .tbtSelRow4.value = False
             End With
         End If
         If n = 2 Then
-            With ListDet
+            With SheetDet
                 .tbtSelRow1.value = False
                 .tbtSelRow3.value = False
                 .tbtSelRow4.value = False
             End With
         End If
         If n = 3 Then
-            With ListDet
+            With SheetDet
                 .tbtSelRow1.value = False
                 .tbtSelRow2.value = False
                 .tbtSelRow4.value = False
             End With
         End If
         If n = 4 Then
-            With ListDet
+            With SheetDet
                 .tbtSelRow1.value = False
                 .tbtSelRow2.value = False
                 .tbtSelRow3.value = False
             End With
         End If
     Else
-        With ListDet
+        With SheetDet
             .tbtSelRow1.value = False
             .tbtSelRow2.value = False
             .tbtSelRow3.value = False
             .tbtSelRow4.value = False
         End With
         If n = 1 Then
-            With ListDet
+            With SheetDet
                 .tbtSelCol2.value = False
                 .tbtSelCol3.value = False
                 .tbtSelCol4.value = False
             End With
         End If
         If n = 2 Then
-            With ListDet
+            With SheetDet
                 .tbtSelCol1.value = False
                 .tbtSelCol3.value = False
                 .tbtSelCol4.value = False
             End With
         End If
         If n = 3 Then
-            With ListDet
+            With SheetDet
                 .tbtSelCol1.value = False
                 .tbtSelCol2.value = False
                 .tbtSelCol4.value = False
             End With
         End If
         If n = 4 Then
-            With ListDet
+            With SheetDet
                 .tbtSelCol1.value = False
                 .tbtSelCol2.value = False
                 .tbtSelCol3.value = False
@@ -140,7 +140,7 @@ Public Sub resetSelectionWithout(ByVal isRow As Boolean, ByVal n As Integer)
 End Sub
 
 Public Sub setEnabledSelectors(ByVal isEnabled As Boolean)
-    With ListDet
+    With SheetDet
         .tbtSelRow1.Enabled = isEnabled
         .tbtSelRow2.Enabled = isEnabled
         .tbtSelRow3.Enabled = isEnabled
@@ -167,7 +167,7 @@ Public Sub resetGame()
     setSetting stgHasMatrixOptimized, 0
 
     Range(getSetting(stgRangeMatrix)).value = 0 'Zero fill
-    ListDet.cmdCheckDet.Enabled = False
+    SheetDet.cmdCheckDet.Enabled = False
     setEnabledSelectors False
     With Range(getSetting(stgAddrResultsCell))
         .value = ""
@@ -178,7 +178,7 @@ Public Sub resetGame()
     Range(getSetting(stgAddrZeros)).value = ""
     Range(getSetting(stgAddrDirection)).value = ""
     Range(getSetting(stgAddrFactor)).value = 1
-    With ListDet
+    With SheetDet
         .tbtSelCol1.value = False
         .tbtSelCol2.value = False
         .tbtSelCol3.value = False
@@ -200,7 +200,7 @@ End Sub
 
 Public Sub checkOptimization()
     If DetOperations.isOptimizedByTask Then
-        With ListDet
+        With SheetDet
             .Range(getSetting(stgAddrOptimizedStatusCell)).value = getSetting(stgStrMatrixHasOptimized)
             .cmdCheckDet.Enabled = True
         End With
