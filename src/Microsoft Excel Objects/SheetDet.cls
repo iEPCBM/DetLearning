@@ -75,7 +75,7 @@ Private Sub btGenerate_Click()
 End Sub
 
 Private Sub btSettings_Click()
-    Settings.Show
+    formSettings.Show
 End Sub
 
 Private Sub bttSel_Click()
